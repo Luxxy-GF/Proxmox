@@ -84,8 +84,8 @@ msg_ok "Installed MariaDB"
 
 msg_info "Creating MariaDB user"
 
-AdminUser=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
-AdminPass=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+AdminUser="txadmin"
+AdminPass=$(openssl rand -base64 12)
 
 mysql -e "CREATE USER '${AdminUser}'@'%' IDENTIFIED BY '${AdminPass}';"
 mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${AdminUser}'@'%' WITH GRANT OPTION;"
