@@ -92,5 +92,5 @@ mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${AdminUser}'@'%' WITH GRANT OPTION;"
 mysql -e "FLUSH PRIVILEGES;"
 msg_ok "Created MariaDB user"
 
-msg_info "phpmyadmin username: ${AdminUser}"
-msg_info "phpmyadmin password: ${AdminPass}"
+msg_ok "phpmyadmin username: ${AdminUser}"
+msg_ok "phpmyadmin password: ${AdminPass}"
