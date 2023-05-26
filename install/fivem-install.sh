@@ -7,9 +7,14 @@ network_check
 update_os
 
 
-apt update -y
-apt install -y tar xz-utils file jq curl wget neofetch htop unzip git nload
-apt install -y libatomic1 libgdiplus libc6-dev gcc g++ make
+msg_info "Installing Dependencies"
+$STD apt-get install -y curl
+$STD apt-get install -y sudo
+$STD apt-get install -y xz-utils
+$STD apt-get install -y jq
+$STD apt-get install -y tar
+$STD apt-get install -y file
+msg_ok "Installed Dependencies"
 
 RELEASE_PAGE=$(curl -sSL https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)
 CHANGELOGS_PAGE=$(curl -sSL https://changelogs-live.fivem.net/api/changelog/versions/linux/server)
