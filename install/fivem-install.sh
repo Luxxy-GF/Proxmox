@@ -7,6 +7,10 @@ network_check
 update_os
 
 
+apt update -y
+apt install -y tar xz-utils file jq curl wget neofetch htop unzip git nload
+apt install -y libatomic1 libgdiplus libc6-dev gcc g++ make
+
 RELEASE_PAGE=$(curl -sSL https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)
 CHANGELOGS_PAGE=$(curl -sSL https://changelogs-live.fivem.net/api/changelog/versions/linux/server)
 FIVEM_VERSION="latest"
