@@ -66,7 +66,7 @@ systemctl enable fivem.service
 systemctl start fivem.service
 ## wait for 5 seconds
 sleep 5
-systemctl status fivem.service > /opt/fivem/txadmin.txt
+journalctl -u fivem.service > /opt/fivem/txadmin.txt
 
 ## get txadmin password
 
