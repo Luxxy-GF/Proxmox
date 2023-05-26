@@ -8,17 +8,18 @@ source <(curl -s https://raw.githubusercontent.com/Luxxy-GF/Proxmox/main/misc/bu
 function header_info {
 clear
 cat <<"EOF"
-  ______    __               
- /_  __/___/ /___  __________
-  / / / __  / __ `/ ___/ ___/
- / / / /_/ / /_/ / /  / /    
-/_/  \__,_/\__,_/_/  /_/     
-                             
+    ____       __               
+   / __ \___  / /_  ______ ____ 
+  / / / / _ \/ / / / / __ `/ _ \
+ / /_/ /  __/ / /_/ / /_/ /  __/
+/_____/\___/_/\__,_/\__, /\___/ 
+                   /____/       
+ 
 EOF
 }
 header_info
 echo -e "Loading..."
-APP="Tdarr"
+APP="fivem"
 var_disk="4"
 var_cpu="2"
 var_ram="2048"
@@ -29,7 +30,7 @@ color
 catch_errors
 
 function default_settings() {
-  CT_TYPE="0"
+  CT_TYPE="1"
   PW=""
   CT_ID=$NEXTID
   HN=$NSAPP
@@ -52,10 +53,9 @@ function default_settings() {
 
 function update_script() {
 header_info
-if [[ ! -d /opt/tdarr ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
+if [[ ! -f /etc/systemd/system/fivem.service ]]; then msg_error "No ${APP} Installation Found!"; exit; fi
 msg_info "Updating $APP LXC"
 apt-get update &>/dev/null
-apt-get -y upgrade &>/dev/null
 msg_ok "Updated $APP LXC"
 exit
 }
@@ -66,4 +66,4 @@ description
 
 msg_ok "Completed Successfully!\n"
 echo -e "${APP} should be reachable by going to the following URL.
-         ${BL}http://${IP}:8265${CL} \n"
+         ${BL}http://${IP}:40120${CL} \n"
