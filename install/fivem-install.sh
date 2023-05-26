@@ -34,11 +34,11 @@ else
     DOWNLOAD_LINK=$(echo https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/${VERSION_LINK})
   fi
 fi
+mkdir -p /opt/fivem/
 #echo -e "Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}"
 msg_info "Downloading fivem files"
 curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}
 msg_info "Extracting fivem files"
-mkdir -p /opt/fivem/
 tar -xvf ${DOWNLOAD_LINK##*/} -C /opt/fivem/
 rm -rf ${DOWNLOAD_LINK##*/} run.sh
 msg_info "install complete"
