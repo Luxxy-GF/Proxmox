@@ -64,4 +64,12 @@ msg_info "systemd service created"
 systemctl daemon-reload
 systemctl enable fivem.service
 systemctl start fivem.service
+## wait for 5 seconds
+sleep 5
+systemctl status fivem.service > /opt/fivem/txadmin.txt
+
+## get txadmin password
+
+TXADMIN_PASSWORD=$(cat /opt/fivem/txadmin.txt | grep -oP '(?<=Use the PIN below to register: ).*(?=)' | sed 's/ //g')
+msg_info "txadmin code is ${TXADMIN_PASSWORD}"
 
