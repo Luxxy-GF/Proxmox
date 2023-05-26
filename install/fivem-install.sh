@@ -54,7 +54,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/opt/fivem/
-ExecStart=/opt/fivem/run.sh
+ExecStart=/opt/fivem/alpine/opt/cfx-server/ld-musl-x86_64.so.1 --library-path "/opt/fivem/alpine/usr/lib/v8/:/opt/fivem/alpine/lib/:/opt/fivem/alpine/usr/lib/" -- /opt/fivem/alpine/opt/cfx-server/FXServer +set citizen_dir /opt/fivem/alpine/opt/cfx-server/citizen/ +set serverProfile default +set txAdminPort 40120
 Restart=on-failure
 
 [Install]
