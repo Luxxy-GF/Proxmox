@@ -75,7 +75,7 @@ msg_info "${TXADMIN_CODE}"
 
 
 
-## install mariadb and phpmyadmin for txadmin database
+## install mariadb for txadmin database
 
 msg_info "Installing MariaDB"
 $STD apt-get install -y mariadb-server
@@ -91,13 +91,6 @@ mysql -e "CREATE USER '${AdminUser}'@'%' IDENTIFIED BY '${AdminPass}';"
 mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${AdminUser}'@'%' WITH GRANT OPTION;"
 mysql -e "FLUSH PRIVILEGES;"
 msg_ok "Created MariaDB user"
-
-## install phpmyadmin
-
-msg_info "Installing phpmyadmin"
-$STD apt-get install -y phpmyadmin
-msg_ok "Installed phpmyadmin"
-
 
 msg "phpmyadmin username: ${AdminUser}"
 msg "phpmyadmin password: ${AdminPass}"
