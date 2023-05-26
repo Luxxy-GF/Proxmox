@@ -54,7 +54,7 @@ After=network.target
 Type=simple
 User=root
 WorkingDirectory=/opt/fivem/
-ExecStart=/opt/fivem/run.sh +exec server.cfg
+ExecStart=/opt/fivem/run.sh
 Restart=on-failure
 
 [Install]
