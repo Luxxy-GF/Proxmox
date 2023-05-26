@@ -73,3 +73,31 @@ journalctl -u fivem.service > /opt/fivem/txadmin.txt
 TXADMIN_CODE=$(cat /opt/fivem/txadmin.txt)
 msg_info "${TXADMIN_CODE}"
 
+
+
+## install mariadb and phpmyadmin for txadmin database
+
+msg_info "Installing MariaDB"
+$STD apt-get install -y mariadb-server
+msg_ok "Installed MariaDB"
+## create username and generate password
+
+msg_info "Creating MariaDB user"
+
+AdminUser=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+AdminPass=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 10 | head -n 1)
+
+mysql -e "CREATE USER '${AdminUser}'@'%' IDENTIFIED BY '${AdminPass}';"
+mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${AdminUser}'@'%' WITH GRANT OPTION;"
+mysql -e "FLUSH PRIVILEGES;"
+msg_ok "Created MariaDB user"
+
+## install phpmyadmin
+
+msg_info "Installing phpmyadmin"
+$STD apt-get install -y phpmyadmin
+msg_ok "Installed phpmyadmin"
+
+
+msg "phpmyadmin username: ${AdminUser}"
+msg "phpmyadmin password: ${AdminPass}"
