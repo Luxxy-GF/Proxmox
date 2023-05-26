@@ -2,7 +2,7 @@
 # Copyright (c) 2021-2023 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# https://github.com/Luxxy-GF/Proxmox/raw/main/LICENSE
 
 clear
 while true; do
