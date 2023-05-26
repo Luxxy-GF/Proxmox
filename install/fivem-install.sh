@@ -68,8 +68,8 @@ systemctl start fivem.service
 sleep 5
 journalctl -u fivem.service > /opt/fivem/txadmin.txt
 
-## get txadmin password
+## get txadmin Code from journalctl
 
-TXADMIN_PASSWORD=$(cat /opt/fivem/txadmin.txt | grep -oP '(?<=Use the PIN below to register: ).*(?=)' | sed 's/ //g')
-msg_info "txadmin code is ${TXADMIN_PASSWORD}"
+TXADMIN_CODE=$(cat /opt/fivem/txadmin.txt)
+msg_info "${TXADMIN_CODE}"
 
