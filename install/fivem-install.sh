@@ -34,14 +34,17 @@ else
     DOWNLOAD_LINK=$(echo https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/${VERSION_LINK})
   fi
 fi
-echo -e "Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}"
+#echo -e "Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}"
+msg_info "Downloading fivem files"
 curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}
-echo "Extracting fivem files"
+msg_info "Extracting fivem files"
+mkdir -p /opt/fivem/
 tar -xvf ${DOWNLOAD_LINK##*/} -C /opt/fivem/
 rm -rf ${DOWNLOAD_LINK##*/} run.sh
-echo "install complete"
+msg_info "install complete"
 
 ## create systemd service
+msg_info "Creating systemd service"
 cat <<EOF >/etc/systemd/system/fivem.service
 [Unit]
 Description=Fivem Server
@@ -57,6 +60,7 @@ Restart=on-failure
 [Install]
 WantedBy=multi-user.target
 EOF
+msg_info "systemd service created"
 systemctl daemon-reload
 systemctl enable fivem.service
 systemctl start fivem.service
