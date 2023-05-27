@@ -35,7 +35,6 @@ else
   fi
 fi
 mkdir -p /opt/fivem/
-#echo -e "Running curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}"
 msg_info "Downloading fivem files"
 curl -sSL ${DOWNLOAD_LINK} -o ${DOWNLOAD_LINK##*/}
 msg_info "Extracting fivem files"
@@ -64,7 +63,7 @@ msg_info "systemd service created"
 systemctl daemon-reload
 systemctl enable fivem.service
 systemctl start fivem.service
-## wait for 5 seconds
+msg_ok "sleeping for 5 seconds to get txadmin code from journalctl -u fivem.servi"
 sleep 5
 journalctl -u fivem.service > /opt/fivem/txadmin.txt
 
@@ -92,5 +91,11 @@ mysql -e "GRANT ALL PRIVILEGES ON *.* TO '${AdminUser}'@'%' WITH GRANT OPTION;"
 mysql -e "FLUSH PRIVILEGES;"
 msg_ok "Created MariaDB user"
 
-msg_ok "phpmyadmin username: ${AdminUser}"
-msg_ok "phpmyadmin password: ${AdminPass}"
+cat <<EOF > /root/txadmindatabase.txt
+MariaDB username: ${AdminUser}
+MariaDB password: ${AdminPass}
+EOF
+msg_ok "MariaDB credentials saved to /root/txadmindatabase.txt"
+
+msg_info "MariaDB password: ${AdminPass}"
+msg_info "MariaDB username: ${AdminUser}"
