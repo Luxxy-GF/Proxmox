@@ -99,3 +99,51 @@ msg_ok "MariaDB credentials saved to /root/txadmindatabase.txt"
 
 msg_info "MariaDB password: ${AdminPass}"
 msg_info "MariaDB username: ${AdminUser}"
+
+
+## instll ftp server using vsftpd
+
+msg_info "Installing vsftpd"
+$STD apt-get install -y vsftpd
+msg_ok "Installed vsftpd"
+
+msg_info "Configuring vsftpd"
+cat <<EOF > /etc/vsftpd.conf
+listen=YES
+listen_ipv6=NO
+anonymous_enable=NO
+local_enable=YES
+write_enable=YES
+local_umask=022
+dirmessage_enable=YES
+use_localtime=YES
+xferlog_enable=YES
+connect_from_port_20=YES
+chroot_local_user=YES
+secure_chroot_dir=/var/run/vsftpd/empty
+pam_service_name=vsftpd
+pasv_enable=YES
+pasv_min_port=40000
+pasv_max_port=50000
+userlist_enable=YES
+userlist_file=/etc/vsftpd.userlist
+userlist_deny=NO
+EOF
+msg_ok "Configured vsftpd"
+
+msg_info "Creating vsftpd user"
+useradd -m -d /home/txadmin -s /bin/bash txadmin
+echo "txadmin:${AdminPass}" | chpasswd
+msg_ok "Created vsftpd user"
+
+msg_info "Creating vsftpd userlist"
+echo "txadmin" > /etc/vsftpd.userlist
+msg_ok "Created vsftpd userlist"
+
+msg_info "Restarting vsftpd"
+systemctl restart vsftpd
+
+msg_info "Enabling vsftpd"
+systemctl enable vsftpd
+
+msg_ok "Installed vsftpd"
